@@ -224,12 +224,12 @@ class RtcClient{
     
     getDynamicKey(channelName){
         // if dynamic not enabled
-        // return new Deferred().resolve(undefined).promise();
+        return new Deferred().resolve(undefined).promise();
         
         // if dynamic key enabled
-        return $.ajax({
-            url: 'service url to get your dynamic key'
-        })
+        // return $.ajax({
+        //     url: 'service url to get your dynamic key'
+        // })
     }
 
     getResolutionArray(reso) {
