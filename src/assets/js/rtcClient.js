@@ -1,7 +1,6 @@
 class RtcClient{
-    constructor(appid, appcert){
+    constructor(appid){
         this.appid = appid;
-        this.appcert = appcert;
         this.rtc = AgoraRTC.createClient({ mode: 'interop' });
         this.localStream = null;
         this.uid = null;
@@ -224,11 +223,12 @@ class RtcClient{
     }
     
     getDynamicKey(channelName){
-        if(this.dynamicKey !== null){
-            return this.dynamicKey;
-        }
+        // if dynamic not enabled
+        // return new Deferred().resolve(undefined).promise();
+        
+        // if dynamic key enabled
         return $.ajax({
-            url: 'https://agorapremium-test.agora.io:9002/agora/media/genDynamicKey5?channelname=' + channelName + '&key=' + this.appid + '&sign=' + this.appcert
+            url: 'service url to get your dynamic key'
         })
     }
 

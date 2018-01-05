@@ -186,10 +186,10 @@
             }
         }
 
-        const appid = "YOUR_SIGNALING_APPID", appcert = "YOUR_SIGNALING_APP_CERTIFICATE";
+        const appid = "YOUR_SIGNALING_APPID";
         let localAccount = Browser.getParameterByName("account");
-        let signal = new SignalingClient(appid, appcert);
-        let rtc = new RtcClient(appid, appcert);
+        let signal = new SignalingClient(appid);
+        let rtc = new RtcClient(appid);
         let client = new Client(signal, rtc, localAccount);
         let channelName = Math.random() * 10000 + "";
         //by default call btn is disabled

@@ -14,7 +14,6 @@ class SignalingClient{
     login(account){
         let deferred = $.Deferred();
         let appid = this.appid;
-        let appcert = this.appcert;
         Logger.log('Logging in ' + account);
         //starts login
         let session = this.signal.login(account, "_no_need_token");
