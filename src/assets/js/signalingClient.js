@@ -1,11 +1,10 @@
 class SignalingClient{
-    constructor(appid, appcertificate){
+    constructor(appid){
         this.signal = Signal(appid);
         this.call_holding = null;
         this.call_active = null;
         this.channel = null;
         this.appid = appid;
-        this.appcert = appcertificate;
         this.uid = null;
 
         this.onInviteReceived = null;
@@ -18,7 +17,7 @@ class SignalingClient{
         let appcert = this.appcert;
         Logger.log('Logging in ' + account);
         //starts login
-        let session = this.signal.login(account, appcert ? SignalingToken.get(appid, appcert, account, 1):"");
+        let session = this.signal.login(account, "_no_need_token");
         
         //if success
         session.onLoginSuccess = $.proxy(uid => {
