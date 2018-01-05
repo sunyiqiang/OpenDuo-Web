@@ -19,7 +19,7 @@
 const appid = "YOUR_SIGNALING_APPID", appcert = "YOUR_SIGNALING_APP_CERTIFICATE";
 ```
 
-将您获得的SDK文件'AgoraSig-*.js'置于'/src/assets/vendor'目录下。在项目根目录使用npm安装项目依赖，并使用gulp打包出发布文件  
+将您获得的信令SDK文件'AgoraSig-*.js' 与 视频通讯SDK文件 'AgoraRTC-*.js' 置于'/src/assets/vendor'目录下。在项目根目录使用npm安装项目依赖，并使用gulp打包出发布文件  
 
 ``` bash
 # install dependency
@@ -37,6 +37,20 @@ gulp build
 let session = this.signal.login(account,'_no_need_token');
 //... 
 ```
+### 关于动态key
+在使用视频通讯服务时可提供动态key，一般由服务器计算提供作为身份凭证，默认不适用，如需使用，请修改rtc.js中的getDynamicKey函数
+``` javascript
+getDynamicKey(channelName){
+    // if dynamic not enabled
+    return new Deferred().resolve(undefined).promise();
+
+    // if dynamic key enabled
+    // return $.ajax({
+    //     url: 'service url to get your dynamic key'
+    // })
+}
+```
+
 
 ## 联系我们
 - 完整的 API 文档见 [文档中心](https://docs.agora.io/cn/)
