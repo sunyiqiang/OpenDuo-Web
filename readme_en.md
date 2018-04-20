@@ -37,7 +37,9 @@ NOTE: Deploy this project on the server and view the page using http/https. Do n
 
 The SignalingToken is not used by default. When you login the signaling server, have the server work out the SignalingToken for authentication purposes. To use the SignalingToken, also rewrite the following login function in the signalingClient.js.
 
-      //... let session = this.signal.login(account,'_no_need_token');//... 
+      //... 
+      let session = this.signal.login(account,'_no_need_token');
+      //... 
 
 ## About Dynamic key
 
