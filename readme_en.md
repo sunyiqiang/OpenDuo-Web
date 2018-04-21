@@ -14,6 +14,9 @@ The Agora Video SDK supports:
 
 You can also find demos for the following platforms:
 
+- [OpenDuo-iOS-Objective-C](https://github.com/AgoraIO/OpenDuo-iOS-Objective-C)
+- [OpenDuo-Android](https://github.com/AgoraIO/OpenDuo-Android)
+
 ## Running the App
 1. Create a developer account at [Agora.io](https://dashboard.agora.io/signin/), obtain an App ID, and enable the App Certificate. 
 2. Fill in the AppID and the App Certificate in the meeting.js:
