@@ -1,4 +1,7 @@
 # Agora Open Duo (WEB)
+
+*其他语言版本： [简体中文](README.zh.md)*
+
 Built upon the Agora Video SDK and the Agora Signaling SDK, the Agora WEB OpenDuo Sample App is an open-source demo that integrates video chat into your WEB applications.
 
 This sample app allows you to:
