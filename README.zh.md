@@ -1,6 +1,6 @@
 # Agora Open Duo (WEB)
 
-README in [English](readme_en.md).
+*README in [English](readme_en.md).*
 
 这个开源示例项目演示了如何快速集成 Agora 信令 SDK 实现一个简单的视频电话应用。
 
