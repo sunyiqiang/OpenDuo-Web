@@ -44,7 +44,7 @@ The SignalingToken is not used by default. When you login the signaling server, 
       let session = this.signal.login(account,'_no_need_token');
       //... 
 
-## About Dynamic key
+## About the Dynamic key
 
 The dynamic key is not used by default. Use the video server to work it out for authentication purposes. Modify the getDynamicKey function in the rtc.js. 
 
