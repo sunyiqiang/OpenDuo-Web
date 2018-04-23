@@ -2,7 +2,12 @@
 
 *其他语言版本： [简体中文](README.zh.md)*
 
-Built upon the Agora Video SDK and the Agora Signaling SDK, the Agora WEB OpenDuo Sample App is an open-source demo that integrates video chat into your WEB applications.
+The Agora Video SDK supports:
+* [iOS](https://github.com/AgoraIO/OpenDuo-iOS-Objective-C)
+* [Android](https://github.com/AgoraIO/OpenDuo-Android)
+* Web
+
+Built upon the Agora Video SDK and the Agora Signaling SDK, the Agora WEB Open Duo Sample App is an open-source demo that integrates video chat into your WEB applications.
 
 This sample app allows you to:
 * Login the signaling server
@@ -10,15 +15,24 @@ This sample app allows you to:
 * Join the media channel
 * Leave the media channel
 
-The Agora Video SDK supports:
-* iOS
-* Android
-* Web
 
-You can also find demos for the following platforms:
 
-- [OpenDuo-iOS-Objective-C](https://github.com/AgoraIO/OpenDuo-iOS-Objective-C)
-- [OpenDuo-Android](https://github.com/AgoraIO/OpenDuo-Android)
+## Preparing the Developer Environment
+
+1. Ensure that your device has a camera and sufficient CPU and memory, and make sure that your device meets one of the following requirements:
+
+  - Windows 7 or later
+  - macOS
+  - iOS 11 or later
+  - Android 4.1 or later
+ 
+ 2. Ensure that your device has one of the following browsers:
+ 
+  - Chrome 58 or later
+  - Firefox 56 or later
+  - Opera 45 or later
+  - Safari 11 or later
+  - QQ browser
 
 ## Running the App
 1. Create a developer account at [Agora.io](https://dashboard.agora.io/signin/), obtain an App ID, and enable the App Certificate. 
