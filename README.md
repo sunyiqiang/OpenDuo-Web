@@ -9,7 +9,7 @@ The Agora OpenDuo Sample App supports the following platforms:
 
 This readme describes steps and several considerations for demonstrating the Agora Web OpenDuo Sample App.
 
-## A Brief Introduction to the Agora Web OpenDuo Sample App
+## A Brief Introduction
 
 Built upon the Agora Video SDK and the Agora Signaling SDK, the Agora Web OpenDuo Sample App is an open-source demo that integrates video chat into your WEB applications.
 
@@ -23,10 +23,10 @@ This sample app allows you to:
 
 1. Ensure that your device has a camera and sufficient CPU and memory, and make sure that your device meets one of the following requirements:
 
-  - Windows 7 or later
-  - macOS
-  - iOS 11 or later
-  - Android 4.1 or later
+  * macOS
+  * Windows 7 or later
+  * iOS 11 or later
+  * Android 4.1 or later
  
  2. Ensure that your device has one of the following browsers:
  
@@ -51,7 +51,7 @@ This sample app allows you to:
 
          gulp build
    
-A “dist” directory is generated under **/root** of your project.
+*A “dist” directory is generated under **/root** of your project.*
 
 NOTE: Deploy this project on the server and view the page using http/https. Do not double click the corresponding file to view the page. 
 
