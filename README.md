@@ -1,4 +1,4 @@
-# Agora Open Duo (WEB)
+# Agora Open Duo (Web)
 
 *其他语言版本： [简体中文](README.zh.md)*
 
@@ -11,9 +11,9 @@ This readme describes steps and several considerations for demonstrating the Ago
 
 ## A Brief Introduction
 
-Built upon the Agora Video SDK and the Agora Signaling SDK, the Agora Web OpenDuo Sample App is an open-source demo that integrates video chat into your WEB applications.
+Built upon the Agora Video SDK and the Agora Signaling SDK, the Agora Web OpenDuo Sample App is an open-source demo that integrates video chat into your Web applications.
 
-This sample app allows you to:
+This sample App allows you to:
 * Login the signaling server
 * Call each other
 * Join the media channel
@@ -85,7 +85,7 @@ The dynamic key is not used by default. Use the video server to work it out for 
 ## Contact Us
  
 * You can find the full API documentation at the [Developer Center](https://docs.agora.io/en/).
-* You can file a ticket about this demo at [issue](https://github.com/OpenDuo-Android/issues).
+* You can file a ticket about this demo at [issue](https://github.com/OpenDuo-Web/issues).
 
 ## License
 
