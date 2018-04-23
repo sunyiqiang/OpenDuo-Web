@@ -5,7 +5,7 @@
 The Agora OpenDuo Sample App supports the following platforms:
 * [iOS](https://github.com/AgoraIO/OpenDuo-iOS-Objective-C)
 * [Android](https://github.com/AgoraIO/OpenDuo-Android)
-* Web
+* [Web](https://github.com/AgoraIO/OpenDuo-Web)
 
 This readme describes steps and several considerations for demonstrating the Agora Web OpenDuo Sample App.
 
