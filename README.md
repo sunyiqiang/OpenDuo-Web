@@ -42,7 +42,8 @@ This sample app allows you to:
 
           const appid = "YOUR_SIGNALING_APPID", appcert = "YOUR_SIGNALING_APP_CERTIFICATE";
       
-3. Download and unzip the Video SDK and the signaling SDK at [Agora.io](https://www.agora.io/en/download/). 
+3. Download the Video SDK and the signaling SDK from [Agora.io](https://www.agora.io/en/download/). 
+4. Unzip the downloaded SDKs. 
 4. Run npm in the root directory of your project to install dependency. 
    
           npm install
@@ -63,7 +64,7 @@ The SignalingToken is not used by default. When you login the signaling server, 
       let session = this.signal.login(account,'_no_need_token');
       //... 
 
-## About the Dynamic key
+## About the Dynamic Key
 
 The dynamic key is not used by default. Use the video server to work it out for authentication purposes. Modify the getDynamicKey function in the rtc.js. 
 
