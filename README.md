@@ -85,7 +85,7 @@ You can use the Dynamic Key provided by the server for authentication purposes. 
 ## Contact Us
  
 * You can find the API documentation at the [Developer Center](https://docs.agora.io/en/).
-* You can file a ticket about this demo at [issue](https://github.com/OpenDuo-Web/issues).
+* You can report issues about this demo at [issue](https://github.com/OpenDuo-Web/issues).
 
 ## License
 
