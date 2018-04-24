@@ -7,13 +7,13 @@ The Agora OpenDuo Sample App supports the following platforms:
 * [Android](https://github.com/AgoraIO/OpenDuo-Android)
 * [Web](https://github.com/AgoraIO/OpenDuo-Web)
 
-This readme describes steps and several considerations for demonstrating the Agora Web OpenDuo Sample App.
+This readme describes the steps and considerations for demonstrating the Agora Web OpenDuo sample app.
 
-## A Brief Introduction
+## Introduction
 
-Built upon the Agora Video SDK and the Agora Signaling SDK, the Agora Web OpenDuo Sample App is an open-source demo that integrates video chat into your Web applications.
+Built upon the Agora Video SDK and the Agora Signaling SDK, the Agora Web OpenDuo sample app is an open-source demo that integrates video chat into your Web applications.
 
-This sample App allows you to:
+This sample app allows you to:
 * Login the signaling server
 * Call each other
 * Join the media channel
@@ -21,7 +21,7 @@ This sample App allows you to:
 
 ## Preparing the Developer Environment
 
-1. Ensure that your device has a camera and sufficient CPU and memory, and make sure that your device meets one of the following requirements:
+1. Ensure that your device has a camera and sufficient CPU power and memory with one of the following requirements:
 
   * macOS
   * Windows 7 or later
@@ -38,13 +38,13 @@ This sample App allows you to:
 
 ## Running the App
 1. Create a developer account at [Agora.io](https://dashboard.agora.io/signin/), obtain an App ID, and enable the App Certificate. 
-2. Fill in the AppID and the App Certificate in the meeting.js:
+2. Fill in the AppID and the App Certificate in meeting.js:
 
           const appid = "YOUR_SIGNALING_APPID", appcert = "YOUR_SIGNALING_APP_CERTIFICATE";
       
-3. Download the Video SDK and the signaling SDK from [Agora.io](https://www.agora.io/en/download/). 
+3. Download the Video SDK and the Signaling SDK from [Agora.io](https://www.agora.io/en/download/). 
 4. Unzip the downloaded SDKs. 
-4. Run npm in the root directory of your project to install dependency. 
+4. Run npm in the root directory of your project to install the dependency. 
    
           npm install
    
@@ -58,7 +58,7 @@ NOTE: Deploy this project on the server and view the page using http/https. Do n
 
 ## About the SignalingToken
 
-The SignalingToken is not used by default. When you login the signaling server, have the server work out the SignalingToken for authentication purposes. To use the SignalingToken, also rewrite the following login function in the signalingClient.js.
+When you login the signaling server, you can use the SignalingToken provided by the server for authentication purposes. The SignalingToken is not used by default. To use the SignalingToken, rewrite the following login function in the signalingClient.js.
 
       //... 
       let session = this.signal.login(account,'_no_need_token');
@@ -66,15 +66,15 @@ The SignalingToken is not used by default. When you login the signaling server, 
 
 ## About the Dynamic Key
 
-The dynamic key is not used by default. Use the video server to work it out for authentication purposes. Modify the getDynamicKey function in the rtc.js. 
+You can use the Dynamic Key provided by the server for authentication purposes. The Dynamic Key is not used by default.  To enable or disable it, modify the getDynamicKey function in rtc.js. 
 
-* If Dynamic Key is not enabled:
+* If the Dynamic Key is not enabled:
 
         getDynamicKey(channelName){
         return new Deferred().resolve(undefined).promise();
         }
         
- * If Dynamic Key is enabled: 
+ * If the Dynamic Key is enabled: 
  
         getDynamicKey(channelName){
           return $.ajax({
@@ -84,7 +84,7 @@ The dynamic key is not used by default. Use the video server to work it out for 
         
 ## Contact Us
  
-* You can find the full API documentation at the [Developer Center](https://docs.agora.io/en/).
+* You can find the API documentation at the [Developer Center](https://docs.agora.io/en/).
 * You can file a ticket about this demo at [issue](https://github.com/OpenDuo-Web/issues).
 
 ## License
