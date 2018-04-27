@@ -30,7 +30,7 @@ This sample app allows you to:
  
  2. Ensure that your device has one of the following browsers:
  
-  - Chrome 58 or later
+  - Google Chrome 58 or later
   - Firefox 56 or later
   - Opera 45 or later
   - Safari 11 or later
