@@ -56,9 +56,9 @@ This sample app allows you to:
 
 NOTE: Deploy this project on the server and view the page using http/https. Do not double click the corresponding file to view the page. 
 
-## About the SignalingToken
+## About SignalingToken
 
-When you login the signaling server, you can use the SignalingToken provided by the server for authentication purposes. The SignalingToken is not used by default. To use the SignalingToken, rewrite the following login function in the signalingClient.js.
+When you login the signaling server, you can use SignalingToken provided by the server for authentication purposes. SignalingToken is not used by default. To use SignalingToken, rewrite the following login function in signalingClient.js.
 
       //... 
       let session = this.signal.login(account,'_no_need_token');
@@ -84,7 +84,7 @@ You can use the Dynamic Key provided by the server for authentication purposes. 
         
 ## Contact Us
  
-* You can find the API documentation at the [Developer Center](https://docs.agora.io/en/).
+* You can find the API documentation at [Developer Center](https://docs.agora.io/en/).
 * You can report issues about this demo at [issue](https://github.com/OpenDuo-Web/issues).
 
 ## License
