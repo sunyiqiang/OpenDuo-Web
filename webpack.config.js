@@ -38,7 +38,7 @@ module.exports = {
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        loader: 'url-loader',
+        loader: 'file-loader',
         options: {
           limit: 10000,
           name: 'assets/media/[name].[hash:7].[ext]'

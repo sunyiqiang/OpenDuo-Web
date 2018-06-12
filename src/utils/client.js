@@ -14,12 +14,12 @@ class Client {
 
         //ring tones resources
         this.sound_ring = new Howl({
-            src: ['../assets/sound/basic_ring.mp3'],
+            src: [require('../assets/media/basic_ring.mp3')],
             loop: true
         });
 
         this.sound_tones = new Howl({
-            src: ['../assets/sound/basic_tones.mp3'],
+            src: [require('../assets/media/basic_tones.mp3')],
             loop: true
         });
 

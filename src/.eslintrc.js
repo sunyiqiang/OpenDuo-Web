@@ -19,6 +19,7 @@ module.exports = {
         ]
     },
     "globals": {
-        "Signal": true
+        "Signal": true,
+        "require": true
     }
 };
