@@ -1,5 +1,9 @@
-class RtcClient{
-    constructor(appid){
+import AgoraRTC from 'agora-rtc-sdk'
+import $ from 'jquery'
+import {Logger} from './utils'
+
+class RtcClient {
+    constructor(appid) {
         this.appid = appid;
         this.rtc = AgoraRTC.createClient({ mode: 'interop' });
         this.localStream = null;
@@ -15,55 +19,52 @@ class RtcClient{
     }
 
     //life cycle
-    init(channelName, autoPublish){
-        let deferred = $.Deferred();
-        let appid = this.appid;
-        let uid = this.uid;
-        let client = this.rtc;
-        this.getDynamicKey(channelName).then($.proxy(key => {
-            client.init(appid,$.proxy(_ => {
-                client.join(key, channelName, undefined, $.proxy(uid => {
-                    let options = {
-                        streamID: uid,
-                        audio: true,
-                        video: true,
-                        screen: false
-                    };
-                    this.uid = uid;
-                    let localStream = AgoraRTC.createStream( options );
-                    localStream.setVideoProfile(this.videoProfile);
-
-                    this.localStream = localStream;
-
-                    localStream.init($.proxy(_ => {
-                        this.rearrangeStreams();
-                        if(autoPublish){
-                            client.publish(localStream);
-                        }
-                        deferred.resolve(localStream);
-                    }, this));
-                }, this), err => {
-                    deferred.reject(err);
+    init(channelName, autoPublish) {
+        return new Promise((resolve, reject) => {
+            let appid = this.appid;
+            let client = this.rtc;
+            this.getDynamicKey(channelName).then(key => {
+                client.init(appid, () => {
+                    client.join(key, channelName, undefined, uid => {
+                        let options = {
+                            streamID: uid,
+                            audio: true,
+                            video: true,
+                            screen: false
+                        };
+                        this.uid = uid;
+                        let localStream = AgoraRTC.createStream(options);
+                        localStream.setVideoProfile(this.videoProfile);
+    
+                        this.localStream = localStream;
+    
+                        localStream.init(() => {
+                            this.rearrangeStreams();
+                            if (autoPublish) {
+                                client.publish(localStream);
+                            }
+                            resolve(localStream);
+                        });
+                    }, err => {
+                        reject(err);
+                    });
                 });
-            }, this));
-        }, this));
-
-        return deferred.promise();
+            });
+        });
     }
 
 
-    end(){
-        let deferred = $.Deferred();
+    end() {
         let client = this.rtc;
         let localStream = this.localStream;
 
-        if(localStream === null){
-            return deferred.resolve().promise();
+        if (localStream === null) {
+            return Promise.resolve();
         }
 
         this.clearStreams();
 
-        if(this.published){
+        if (this.published) {
             client.unpublish(this.localStream);
             this.published = false;
         }
@@ -72,19 +73,20 @@ class RtcClient{
 
         this.remoteStreams = [];
 
-        client.leave(_ => {
-            deferred.resolve();
-        }, _ => {
-            deferred.reject();
+        return new Promise((resolve, reject) => {
+            client.leave(() => {
+                resolve();
+            }, () => {
+                reject();
+            });
         });
-        return deferred;
     }
 
-    applyMute(){
+    applyMute() {
         let localStream = this.localStream;
 
-        if(localStream !== null){
-            if(this.muted){
+        if (localStream !== null) {
+            if (this.muted) {
                 localStream.disableAudio();
             } else {
                 localStream.enableAudio();
@@ -92,7 +94,7 @@ class RtcClient{
         }
     }
 
-    toggleMute(){
+    toggleMute() {
         this.muted = !this.muted;
         this.applyMute();
     }
@@ -100,36 +102,36 @@ class RtcClient{
     //events
     subscribeWindowResizeEvent() {
         let videoSize;
-        $(window).resize($.proxy(e => {
+        $(window).resize(() => {
             videoSize = this.calculateStreamSize();
-            if(this.localStream !== null){
+            if (this.localStream !== null) {
                 this.resizeStream(this.localStream, videoSize);
             }
-        }, this));
+        });
     }
 
-    subscribeStreamEvents(){
+    subscribeStreamEvents() {
         let client = this.rtc;
         client.on('stream-added', evt => {
             var stream = evt.stream;
             Logger.log("New stream added: " + stream.getId());
             Logger.log("Timestamp: " + Date.now());
             Logger.log("Subscribe ", stream);
-            client.subscribe(stream, function(err) {
+            client.subscribe(stream, function (err) {
                 Logger.log("Subscribe stream failed", err);
             });
         });
 
-        client.on('peer-leave', $.proxy(evt => {
+        client.on('peer-leave', evt => {
             Logger.log("Peer has left: " + evt.uid);
             Logger.log("Timestamp: " + Date.now());
             Logger.log(evt);
-            
+
             this.removeRemoteStream(evt.uid);
             this.rearrangeStreams();
-        }, this));
+        });
 
-        client.on('stream-subscribed', $.proxy(evt => {
+        client.on('stream-subscribed', evt => {
             var stream = evt.stream;
             Logger.log("Got stream-subscribed event");
             Logger.log("Timestamp: " + Date.now());
@@ -137,7 +139,7 @@ class RtcClient{
             Logger.log(evt);
             this.addRemoteStream(stream);
             this.rearrangeStreams();
-        }, this));
+        });
 
         client.on("stream-removed", evt => {
             var stream = evt.stream;
@@ -148,50 +150,50 @@ class RtcClient{
             this.rearrangeStreams();
         });
 
-        client.on('stream-published', $.proxy(evt => {
+        client.on('stream-published', () => {
             this.published = true;
-        }, this));
+        });
     }
 
-    rearrangeStreams(){
+    rearrangeStreams() {
         let remoteStreams = this.remoteStreams;
         let localStream = this.localStream;
         this.clearStreams();
 
-        if(localStream === null){
+        if (localStream === null) {
             return;
         }
 
-        Logger.log(`Rearranging streams, local:${localStream.getId()}, remote: ${remoteStreams.length === 0 ?"NONE" : remoteStreams[0].id}`);
+        Logger.log(`Rearranging streams, local:${localStream.getId()}, remote: ${remoteStreams.length === 0 ? "NONE" : remoteStreams[0].id}`);
 
-        if(remoteStreams.length === 0){
+        if (remoteStreams.length === 0) {
             this.displayStream($("#media-container"), localStream, "fullscreen");
-        } else if(remoteStreams.length === 1){
+        } else if (remoteStreams.length === 1) {
             this.displayStream($("#media-container"), remoteStreams[0].stream, "fullscreen");
             // this.displayStream($("#media-container"), localStream, "side");
         }
     }
 
     //utils
-    clearStreams(){
+    clearStreams() {
         $("[role=stream]").remove();
     }
 
-    addRemoteStream(stream){
+    addRemoteStream(stream) {
         this.remoteStreams.push({
             stream: stream,
             id: stream.getId()
         });
     }
 
-    removeRemoteStream(streamId){
+    removeRemoteStream(streamId) {
         this.remoteStreams = this.remoteStreams.filter(item => {
             return item.id !== streamId;
         });
     }
 
-    resizeStream(stream, size){
-        
+    resizeStream(stream, size) {
+
         $("#" + stream.getId()).css({
             width: `${size.width}px`,
             height: `${size.height}px`
@@ -205,9 +207,9 @@ class RtcClient{
         $(`#${stream.getId()}`).remove();
         container.append(`<div id="${stream.getId()}" class="${stream === this.localStream ? "agora-local" : "agora_remote"}" role="stream" data-stream-id="${stream.getId()}"></div>`);
 
-        if(mode === "fullscreen"){
+        if (mode === "fullscreen") {
             let size = this.calculateStreamSize();
-            
+
             $("#" + stream.getId()).css({
                 width: `${size.width}px`,
                 height: `${size.height}px`
@@ -221,11 +223,11 @@ class RtcClient{
         }
         stream.play(stream.getId());
     }
-    
-    getDynamicKey(channelName){
+
+    getDynamicKey(channelName) {
         // if dynamic not enabled
-        return new $.Deferred().resolve(undefined).promise();
-        
+        return Promise.resolve(undefined);
+
         // if dynamic key enabled
         // return $.ajax({
         //     url: 'service url to get your dynamic key'
@@ -234,24 +236,24 @@ class RtcClient{
 
     getResolutionArray(reso) {
         switch (reso) {
-            case "120p":
-                return [160, 120];
-            case "240p":
-                return [320, 240];
-            case "360p":
-                return [640, 360];
-            case "480p":
-                return [640, 480];
-            case "720p":
-                return [1280, 720];
-            case "1080p":
-                return [1920, 1080];
-            default:
-                return [1280, 720];
+        case "120p":
+            return [160, 120];
+        case "240p":
+            return [320, 240];
+        case "360p":
+            return [640, 360];
+        case "480p":
+            return [640, 480];
+        case "720p":
+            return [1280, 720];
+        case "1080p":
+            return [1920, 1080];
+        default:
+            return [1280, 720];
         }
     }
 
-    calculateStreamSize(){
+    calculateStreamSize() {
         let viewportWidth = $(window).width(),
             viewportHeight = $(window).height(),
             curResolution = this.getResolutionArray(this.videoProfile),
@@ -262,7 +264,7 @@ class RtcClient{
             ratioWindow,
             ratioVideo;
 
-        
+
         width = viewportWidth - 100;
         height = viewportHeight - 80;
         ratioWindow = width / height;
@@ -285,3 +287,5 @@ class RtcClient{
         };
     }
 }
+
+export default RtcClient;
